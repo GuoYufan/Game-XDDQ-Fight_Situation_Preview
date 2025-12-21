@@ -50,7 +50,11 @@ char **GYF_strsplit(char *input_str, int *number)
 	
 	// printf("输入字符串内容：%s 存放输入字符串的地址：%p",input_str,input_str);getchar();
 	// printf("存放元素数量的地址及内容：%p %d\n",number,*number);
-	char **storage = malloc(0);
+
+/* 不要malloc(0)，否则只能概率性运行成功。而且某一波战报如果连续参赛3次以上必失败。
+由于精怪最多可携带3个，神通最多可携带4个，暂时只为这个项目修复这个字符串分割函数。以后再扩展到字符串分割的通用情况。所以暂时不用动态分配字符串数组空间的方法（而是只动态分配字符串数组的元素——字符串的空间），所以暂时把字符串数组的空间固定为5。
+*/
+	char **storage = malloc( sizeof(char*) * 5);
 
 	char *current_start = input_str;
 	char *current_end = NULL;
