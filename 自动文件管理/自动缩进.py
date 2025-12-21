@@ -44,11 +44,19 @@ def lstrip_precise(word, number):
 def 自动对指定行区间文本缩进指定数量空(被修改的行区间=[0, None], 缩进多少空=4):
     browse_directory("❓要对指定行区间文本缩进指定数量空的文件在哪个目录下？")
     selected_files=select_multiple_files(os.listdir())
+    while True:
+        answer=input("\n❓请输入要被修改的行区间(以空格分隔)(Enter:默认）:\n")
+        if answer:
+            try:被修改的行区间 = [int(num) for num in answer.split()]
+            except:
+                print("❌行号必须是整数\n")
+                continue
+        break
     with open(selected_files[0],'r+') as f:
         文件指针从头移到指定行(f,被修改的行区间[0])
         original_content=f.readlines()[:被修改的行区间[1]]
         for line in original_content:print(line)
-        input("\n⚡️从需要被修改的首行至需要被修改的末行之间的内容已经收集完毕")
+        input("\n⚡️从需要被修改的首行至需要被修改的末行之间的内容已经收集完毕\n(以上显示的是按上封顶，下无限来显示的。是从需要被修改的首行开始，显示到全文结束)\n")
         
         
         # 对需要修改的指定行区间内的原文本内容进行缩进的修改
